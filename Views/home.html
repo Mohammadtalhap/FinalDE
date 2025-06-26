@@ -76,33 +76,9 @@
         </div>
     </div>
 
+
+    <script src="script.js"></script>
     <script>
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
-
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-
-        function logout() {
-            alert("Logged out");
-            localStorage.clear();
-            window.location.href = "login.html";
-        }
-
-        // Populate profile from localStorage
-        const user = JSON.parse(localStorage.getItem('profile')) || {
-            username: 'John Doe',
-            email: 'john@example.com',
-            homeCountry: 'India',
-            destinationCountry: 'Canada'
-        };
-
         document.getElementById('profile-username').textContent = user.username;
         document.getElementById('profile-email').textContent = user.email;
         document.getElementById('profile-home').textContent = user.homeCountry;

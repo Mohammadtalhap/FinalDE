@@ -2,33 +2,71 @@ function scrollToDemo() {
   document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
 }
 
-async function performSearch() {
-    const dest = document.getElementById('destCountry').value.trim();
-    const home = document.getElementById('homeCountry').value.trim();
+async function performSearch(loadAll = false) {
+  const dest = document.getElementById('destCountry')?.value.trim() || '';
+  const home = document.getElementById('homeCountry')?.value.trim() || '';
 
-    const res = await fetch(`http://localhost:3000/api/search?destination=${dest}&home=${home}`);
-    const users = await res.json();
+  let url = 'http://localhost:3000/api/search';
 
-    const container = document.getElementById('searchResults');
-    container.innerHTML = '';
+  if (!loadAll && (dest || home)) {
+    url += `?destination=${encodeURIComponent(dest)}&home=${encodeURIComponent(home)}`;
+  }
 
-    if (users.length === 0) {
-      container.innerHTML = '<p class="placeholder">No users found matching your search.</p>';
-      return;
-    }
+  const res = await fetch(url);
+  const users = await res.json();
 
-    users.forEach(user => {
-      const card = document.createElement('div');
-      card.className = 'user-card';
-      card.innerHTML = `
-        <h4>${user.username}</h4>
-        <p><strong>Email:</strong> ${user.email}</p>
-        <p><strong>From:</strong> ${user.home_country}</p>
-        <p><strong>Going to:</strong> ${user.destination_country}</p>
-      `;
-      container.appendChild(card);
-    });
+  const container = document.getElementById('searchResults');
+  container.innerHTML = '';
+
+  if (!users.length) {
+    container.innerHTML = '<p class="placeholder">No users found matching your search.</p>';
+    return;
+  }
+
+  users.forEach(user => {
+    const card = document.createElement('div');
+    card.className = 'user-card';
+    card.innerHTML = `
+      <h4>${user.username}</h4>
+      <p><strong>Email:</strong> ${user.email}</p>
+      <p><strong>From:</strong> ${user.home_country}</p>
+      <p><strong>Going to:</strong> ${user.destination_country}</p>
+    `;
+    container.appendChild(card);
+  });
 }
+
+function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Load default users if search tab is opened
+            if (sectionId === 'search') {
+                performSearch(true);
+            }
+}
+
+
+        function logout() {
+            alert("Logged out");
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+
+        // Populate profile from localStorage
+        const user = JSON.parse(localStorage.getItem('profile')) || {
+            username: 'John Doe',
+            email: 'john@example.com',
+            homeCountry: 'India',
+            destinationCountry: 'Canada'
+        };
 
 // document.getElementById('signupForm').addEventListener('submit', function (e) {
 //   e.preventDefault();

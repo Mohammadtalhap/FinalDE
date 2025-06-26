@@ -74,17 +74,24 @@ app.post('/api/login', (req, res) => {
 app.get('/api/search', (req, res) => {
   const { destination, home } = req.query;
 
-  let sql = `SELECT * FROM users WHERE 1=1`;
+  let sql = `SELECT * FROM users`;
   const params = [];
 
-  if (destination) {
-    sql += ` AND destination_country LIKE ?`;
-    params.push(`%${destination}%`);
-  }
+  if (destination || home) {
+    sql += ` WHERE 1=1`;
 
-  if (home) {
-    sql += ` AND home_country LIKE ?`;
-    params.push(`%${home}%`);
+    if (destination) {
+      sql += ` AND destination_country LIKE ?`;
+      params.push(`%${destination}%`);
+    }
+
+    if (home) {
+      sql += ` AND home_country LIKE ?`;
+      params.push(`%${home}%`);
+    }
+  } else {
+    // Default: limit to 10 latest users
+    sql += ` ORDER BY id DESC LIMIT 10`;
   }
 
   db.all(sql, params, (err, rows) => {
