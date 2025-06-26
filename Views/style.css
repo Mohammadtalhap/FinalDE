@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #f9f9ff;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: #4a90e2;
+    color: #fff;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px 60px;
+    background: #eef3fd;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.hero button {
+    background: #4a90e2;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.features,
+.demo,
+.cta {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.features ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.features li {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.chat-box-placeholder {
+    height: 200px;
+    width: 300px;
+    margin: 20px auto;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+    background: #fff;
+}
+
+.cta button {
+    background: #ff6b6b;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #4a90e2;
+    color: white;
+    font-size: 0.9em;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3a78c5;
+}
+
+.redirect {
+    text-align: center;
+    margin-top: 15px;
+}
+
+
+
+
+.sidebar {
+    width: 220px;
+    background-color: #2a9d8f;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.nav-btn {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background-color: #21867a;
+}
+
+.main {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.profile-card {
+    max-width: 500px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2a9d8f;
+}
+
+.profile-details p {
+    margin: 0.4rem 0;
+    font-size: 1rem;
+}
+
+.edit-btn {
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-box {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.chat-placeholder {
+    text-align: center;
+    padding-top: 3rem;
+    color: #666;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PassportPals - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f7fa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>PassportPals</h2>
+        <button class="nav-btn active" onclick="showSection('profile')">👤 Profile</button>
+        <button class="nav-btn" onclick="showSection('search')">🔍 Search</button>
+        <button class="nav-btn" onclick="showSection('chat')">💬 Chat</button>
+        <button class="nav-btn" onclick="logout()">🚪 Logout</button>
+    </div>
+
+    <div class="main">
+        <!-- Profile Section -->
+        <div id="profile" class="section active">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar" alt="Default Avatar">
+                    <div>
+                        <h2 id="profile-username">John Doe</h2>
+                        <p id="profile-email">john@example.com</p>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <p><strong>Home Country:</strong> <span id="profile-home">India</span></p>
+                    <p><strong>Destination Country:</strong> <span id="profile-destination">Canada</span></p>
+                </div>
+                <button class="edit-btn">Edit Profile</button>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <!-- Search Section -->
+        <div id="search" class="section">
+            <h2>🔍 Find Your PassportPals</h2>
+
+            <div class="search-fields">
+                <input type="text" id="destCountry" placeholder="Destination Country (e.g., Canada)">
+                <input type="text" id="homeCountry" placeholder="Home Country (e.g., India)">
+                <button onclick="performSearch()">Search</button>
+            </div>
+
+            <div id="searchResults" class="results-container">
+                <p class="placeholder">Search for students by destination or home country.</p>
+            </div>
+        </div>
+
+
+        <!-- Chat Section -->
+        <div id="chat" class="section">
+            <h2>💬 Chat</h2>
+            <div class="chat-placeholder">
+                <p>Chat feature is coming soon...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function logout() {
+            alert("Logged out");
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+
+        // Populate profile from localStorage
+        const user = JSON.parse(localStorage.getItem('profile')) || {
+            username: 'John Doe',
+            email: 'john@example.com',
+            homeCountry: 'India',
+            destinationCountry: 'Canada'
+        };
+
+        document.getElementById('profile-username').textContent = user.username;
+        document.getElementById('profile-email').textContent = user.email;
+        document.getElementById('profile-home').textContent = user.homeCountry;
+        document.getElementById('profile-destination').textContent = user.destinationCountry;
+    </script>
+
+</body>
+
+</html>
