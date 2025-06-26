@@ -24,15 +24,24 @@ async function performSearch(loadAll = false) {
   }
 
   users.forEach(user => {
-    const card = document.createElement('div');
-    card.className = 'user-card';
-    card.innerHTML = `
-      <h4>${user.username}</h4>
-      <p><strong>Email:</strong> ${user.email}</p>
+  const card = document.createElement('div');
+  card.className = 'profile-card'; // same style as profile section
+
+  card.innerHTML = `
+    <div class="profile-header">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar" alt="User Avatar">
+      <div>
+        <h4>${user.username}</h4>
+        <p>${user.email}</p>
+      </div>
+    </div>
+    <div class="profile-details">
       <p><strong>From:</strong> ${user.home_country}</p>
       <p><strong>Going to:</strong> ${user.destination_country}</p>
-    `;
-    container.appendChild(card);
+    </div>
+  `;
+
+  container.appendChild(card);
   });
 }
 
