@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - GlobalBuddy</title>
+    <title>Login - PassportPals</title>
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -41,6 +41,7 @@
 
             if (res.ok) {
                 alert(result.message);
+                localStorage.setItem('userEmail', result.email);
                 window.location.href = "home.html"; // Redirect to home page on success
             } else {
                 alert(result.message);

@@ -12,6 +12,14 @@ db.serialize(() => {
       destination_country TEXT NOT NULL
     )
   `);
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS connections (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_email TEXT NOT NULL,
+      connected_email TEXT NOT NULL
+    )
+  `);
 });
 
 module.exports = db;

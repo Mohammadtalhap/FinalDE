@@ -25,7 +25,7 @@ async function performSearch(loadAll = false) {
 
   users.forEach(user => {
   const card = document.createElement('div');
-  card.className = 'profile-card'; // same style as profile section
+  card.className = 'profile-card';
 
   card.innerHTML = `
     <div class="profile-header">
@@ -39,15 +39,38 @@ async function performSearch(loadAll = false) {
       <p><strong>From:</strong> ${user.home_country}</p>
       <p><strong>Going to:</strong> ${user.destination_country}</p>
     </div>
+    <button class="connect-btn" onclick="connectToUser('${user.email}')">Connect</button>
   `;
 
   container.appendChild(card);
+});
+
+}
+
+async function connectToUser(targetEmail) {
+  const currentUserEmail = localStorage.getItem('userEmail'); // or get from session
+
+  if (!currentUserEmail) {
+    alert('You must be logged in to connect.');
+    return;
+  }
+
+  const res = await fetch('http://localhost:3000/api/connect', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: currentUserEmail,
+      to: targetEmail
+    })
   });
+
+  const result = await res.json();
+  alert(result.message);
 }
 
 function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(sec => {
-                sec.classList.remove('active');
+              sec.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
 
@@ -63,19 +86,20 @@ function showSection(sectionId) {
 }
 
 
-        function logout() {
-            alert("Logged out");
-            localStorage.clear();
-            window.location.href = "login.html";
-        }
+function logout() {
+
+  alert("Logged out");
+  localStorage.clear();
+  window.location.href = "login.html";
+}
 
         // Populate profile from localStorage
-        const user = JSON.parse(localStorage.getItem('profile')) || {
-            username: 'John Doe',
-            email: 'john@example.com',
-            homeCountry: 'India',
-            destinationCountry: 'Canada'
-        };
+const user = JSON.parse(localStorage.getItem('profile')) || {
+  username: 'John Doe',
+  email: 'john@example.com',
+  homeCountry: 'India',
+  destinationCountry: 'Canada'
+};
 
 // document.getElementById('signupForm').addEventListener('submit', function (e) {
 //   e.preventDefault();

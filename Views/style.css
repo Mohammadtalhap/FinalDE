@@ -263,18 +263,17 @@ button:hover {
     color: #666;
 }
 
-.user-card {
-    background-color: #fff;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.user-card h4 {
-    margin-bottom: 0.3rem;
-}
-
 .results-container {
     margin-top: 1rem;
+}
+
+.connect-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
 }

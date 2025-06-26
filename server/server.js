@@ -44,30 +44,27 @@ app.post('/api/signup', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
-  console.log("🔑 Login attempt:", req.body);
-
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ message: 'Username and password are required.' });
+    return res.status(400).json({ message: 'All fields are required.' });
   }
 
-  const sql = `
-    SELECT * FROM users WHERE username = ? AND password = ?
-  `;
+  const sql = `SELECT * FROM users WHERE username = ? AND password = ?`;
+  const params = [username, password];
 
-  db.get(sql, [username, password], (err, row) => {
+  db.get(sql, params, (err, row) => {
     if (err) {
-      console.error('❌ Login DB error:', err.message);
-      return res.status(500).json({ message: 'Server error. Try again later.' });
+      console.error(err.message);
+      return res.status(500).json({ message: 'Login failed due to server error.' });
     }
 
     if (!row) {
       return res.status(401).json({ message: 'Invalid username or password.' });
     }
 
-    console.log(`✅ Login successful for ${username}`);
-    res.status(200).json({ message: 'Login successful!' });
+    // ✅ Login successful, send back email
+    res.status(200).json({ message: 'Login successful', email: row.email });
   });
 });
 
@@ -111,6 +108,24 @@ app.get('/api/users', (req, res) => {
       return res.status(500).json({ message: 'Error retrieving users.' });
     }
     res.json(rows);
+  });
+});
+
+app.post('/api/connect', (req, res) => {
+  const { from, to } = req.body;
+
+  if (!from || !to || from === to) {
+    return res.status(400).json({ message: 'Invalid connection request.' });
+  }
+
+  const sql = `INSERT INTO connections (user_email, connected_email) VALUES (?, ?)`;
+
+  db.run(sql, [from, to], function (err) {
+    if (err) {
+      console.error(err.message);
+      return res.status(500).json({ message: 'Connection failed or already exists.' });
+    }
+    res.status(200).json({ message: 'User connected successfully!' });
   });
 });
 
