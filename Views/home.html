@@ -71,7 +71,43 @@
         <div id="chat" class="section">
             <h2>💬 Chat</h2>
             <div class="chat-placeholder">
-                <p>Chat feature is coming soon...</p>
+                <div class="chat-container">
+                    <!-- Left Panel: Chat List -->
+                    <div class="chat-list" id="chatList">
+                        <div class="chat-user" onclick="openChat('Darshan')">
+                            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Darshan" />
+                            <div class="chat-user-info">
+                                <h4>Darshan</h4>
+                                <p>Hey, going to Canada?</p>
+                            </div>
+                        </div>
+                        <div class="chat-user" onclick="openChat('Prince')">
+                            <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Prince" />
+                            <div class="chat-user-info">
+                                <h4>Prince</h4>
+                                <p>Let's plan together!</p>
+                            </div>
+                        </div>
+                        <div class="chat-user" onclick="openChat('Elizabeth')">
+                            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Elizabeth" />
+                            <div class="chat-user-info">
+                                <h4>Elizabeth</h4>
+                                <p>I'm applying for the same course!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Chat Window -->
+                    <div class="chat-window" id="chatWindow">
+                        <div class="messages" id="messages">
+                            <p class="message">Select a user to start chatting.</p>
+                        </div>
+                        <div class="input-area">
+                            <input type="text" id="messageInput" placeholder="Type your message..." />
+                            <button onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -83,6 +119,32 @@
         document.getElementById('profile-email').textContent = user.email;
         document.getElementById('profile-home').textContent = user.homeCountry;
         document.getElementById('profile-destination').textContent = user.destinationCountry;
+
+        let currentChatUser = null;
+
+        function openChat(user) {
+            currentChatUser = user;
+            const messages = document.getElementById('messages');
+            messages.innerHTML = `
+        <p class="message"><strong>${user}:</strong> Hi! Let's connect.</p>
+        <p class="message"><strong>You:</strong> Hello ${user}, excited to chat!</p>
+      `;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message || !currentChatUser) return;
+
+            const messages = document.getElementById('messages');
+            const newMsg = document.createElement('p');
+            newMsg.className = 'message';
+            newMsg.textContent = `You: ${message}`;
+            messages.appendChild(newMsg);
+
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+        }
     </script>
 
 </body>
